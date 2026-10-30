@@ -1,0 +1,8 @@
+<label for="recherche">Recherche</label>
+<input id="recherche" type="text" [formControl]="recherche" />
+
+<ul>
+  @for (fruit of fruitsFiltres(); track fruit) {
+    <li>{{ fruit }}</li>
+  }
+</ul>
