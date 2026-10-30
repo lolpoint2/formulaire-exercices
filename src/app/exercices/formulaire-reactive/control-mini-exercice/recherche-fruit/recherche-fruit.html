@@ -2,6 +2,21 @@
 <input id="recherche" type="text" [formControl]="recherche" />
 
 <ul>
+  <li>Valeur : {{ valeur() }}</li>
+  <li>Valid : {{ recherche.valid }}</li>
+  <li>Touched : {{ recherche.touched }}</li>
+  <li>Dirty : {{ recherche.dirty }}</li>
+</ul>
+
+@if (recherche.invalid && recherche.touched) {
+  @if (recherche.hasError('required')) {
+    <p>La recherche est obligatoire.</p>
+  } @else if (recherche.hasError('minlength')) {
+    <p>La recherche doit contenir au moins 3 caractères.</p>
+  }
+}
+
+<ul>
   @for (fruit of fruitsFiltres(); track fruit) {
     <li>{{ fruit }}</li>
   }
