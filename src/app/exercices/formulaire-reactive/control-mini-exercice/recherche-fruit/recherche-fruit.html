@@ -1,5 +1,7 @@
 <label for="recherche">Recherche</label>
 <input id="recherche" type="text" [formControl]="recherche" />
+<button type="button" (click)="recherche.reset()">Vider</button>
+<button type="button" (click)="recherche.setValue('fra')">Exemple</button>
 
 <ul>
   <li>Valeur : {{ valeur() }}</li>
