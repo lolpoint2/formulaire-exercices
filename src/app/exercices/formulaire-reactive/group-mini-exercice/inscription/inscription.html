@@ -1,0 +1,72 @@
+<form [formGroup]="inscriptionForm">
+  <div>
+    <label for="prenom">Prénom</label>
+    <input id="prenom" type="text" formControlName="prenom" />
+    @if (inscriptionForm.controls.prenom.invalid && inscriptionForm.controls.prenom.touched) {
+      <p>Le prénom est obligatoire.</p>
+    }
+  </div>
+
+  <div>
+    <label for="nom">Nom</label>
+    <input id="nom" type="text" formControlName="nom" />
+    @if (inscriptionForm.controls.nom.invalid && inscriptionForm.controls.nom.touched) {
+      <p>Le nom est obligatoire.</p>
+    }
+  </div>
+
+  <div>
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email" />
+    @if (inscriptionForm.controls.email.invalid && inscriptionForm.controls.email.touched) {
+      @if (inscriptionForm.controls.email.hasError('required')) {
+        <p>L'email est obligatoire.</p>
+      } @else if (inscriptionForm.controls.email.hasError('email')) {
+        <p>Le format de l'email est invalide.</p>
+      }
+    }
+  </div>
+
+  <div>
+    <label for="age">Âge</label>
+    <input id="age" type="number" formControlName="age" />
+    @if (inscriptionForm.controls.age.invalid && inscriptionForm.controls.age.touched) {
+      @if (inscriptionForm.controls.age.hasError('required')) {
+        <p>L'âge est obligatoire.</p>
+      } @else if (inscriptionForm.controls.age.hasError('min')) {
+        <p>Il faut avoir au moins 18 ans.</p>
+      }
+    }
+  </div>
+
+  <fieldset formGroupName="adresse">
+    <legend>Adresse</legend>
+
+    <div>
+      <label for="rue">Rue</label>
+      <input id="rue" type="text" formControlName="rue" />
+    </div>
+
+    <div>
+      <label for="ville">Ville</label>
+      <input id="ville" type="text" formControlName="ville" />
+      @if (adresse.ville.invalid && adresse.ville.touched) {
+        <p>La ville est obligatoire.</p>
+      }
+    </div>
+
+    <div>
+      <label for="codePostal">Code postal</label>
+      <input id="codePostal" type="text" formControlName="codePostal" />
+      @if (adresse.codePostal.invalid && adresse.codePostal.touched) {
+        @if (adresse.codePostal.hasError('required')) {
+          <p>Le code postal est obligatoire.</p>
+        } @else if (adresse.codePostal.hasError('pattern')) {
+          <p>Le code postal doit contenir exactement 4 chiffres.</p>
+        }
+      }
+    </div>
+  </fieldset>
+
+  <button type="button" (click)="preRemplir()">Pré-remplir</button>
+</form>

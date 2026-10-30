@@ -1,0 +1,32 @@
+<form [formGroup]="commandeForm">
+  <div>
+    <label for="client">Client</label>
+    <input id="client" type="text" formControlName="client" />
+  </div>
+
+  <fieldset formArrayName="articles">
+    <legend>Articles</legend>
+
+    @for (article of articles.controls; track article) {
+      <div [formGroupName]="$index">
+        <label>
+          Produit
+          <input type="text" formControlName="produit" />
+        </label>
+        <label>
+          Quantité
+          <input type="number" formControlName="quantite" />
+        </label>
+        <label>
+          Prix unitaire
+          <input type="number" formControlName="prixUnitaire" />
+        </label>
+        <button type="button" (click)="supprimerArticle($index)">Supprimer</button>
+      </div>
+    }
+
+    <button type="button" (click)="ajouterArticle()">Ajouter un article</button>
+  </fieldset>
+
+  <p>Total : {{ total() }} €</p>
+</form>
